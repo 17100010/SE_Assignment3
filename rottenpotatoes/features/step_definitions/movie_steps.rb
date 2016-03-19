@@ -15,7 +15,13 @@ end
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.body is the entire content of the page as a string.
-  flunk "Unimplemented"
+  x = page.body.to_s
+  # puts x
+  indexOfe1 = x.index(e1)
+  indexOfe2 = x.index(e2)
+  
+  assert(indexOfe1<indexOfe2, "Not sorted correctly")
+  
 end
 
 # Make it easier to express checking or unchecking several boxes at once
@@ -64,5 +70,5 @@ Then /I should see all the movies/ do
   l = page.all("table#movies tr").count - 1
   #the titles of the table are also being included so need to subtract those
   
-  assert(l==value, "This was supposed to be true")
+  assert(l==value, "number of rows in table don't match total DB entries")
 end
