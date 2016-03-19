@@ -2,10 +2,11 @@
 
 Given /the following movies exist/ do |movies_table|
   movies_table.hashes.each do |movie|
+    Movie.create!(movie)
     # each returned element will be a hash whose key is the table header.
     # you should arrange to add that movie to the database here.
   end
-  flunk "Unimplemented"
+  # flunk "Unimplemented"
 end
 
 # Make sure that one string (regexp) occurs before or after another one
@@ -25,10 +26,43 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   # HINT: use String#split to split up the rating_list, then
   #   iterate over the ratings and reuse the "When I check..." or
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
-  flunk "Unimplemented"
+  
+  theRatings = rating_list.split(", ")
+  theR = Movie.all_ratings
+  
+  within "#ratings_form" do
+        theRatings.each do |rating|
+          if uncheck
+            uncheck "ratings[#{rating}]"
+          else
+            
+            check "ratings[#{rating}]"
+          end
+        end
+        
+        theR.each do |r|
+          if(theRatings.include?(r) == false)
+            uncheck "ratings[#{r}]"
+          end
+        end
+      
+  end
+  # find(:css, "#cityID[]").set(true)
+  # page.at_css("[class='Event_CategoryTree category']")
+      # all("input[type='checkbox']").each { |ch| uncheck ch[:id] }
+      # x = find("ratings_#{rating}")
+    # x = find("ratings_#{rat}")
+  
+  
+  # flunk "Unimplemented"
 end
 
 Then /I should see all the movies/ do
   # Make sure that all the movies in the app are visible in the table
-  flunk "Unimplemented"
+  value = Movie.all.length
+  
+  l = page.all("table#movies tr").count - 1
+  #the titles of the table are also being included so need to subtract those
+  
+  assert(l==value, "This was supposed to be true")
 end
