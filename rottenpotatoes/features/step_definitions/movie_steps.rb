@@ -61,13 +61,7 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
         # end
         
   end
-  # find(:css, "#cityID[]").set(true)
-  # page.at_css("[class='Event_CategoryTree category']")
-      # all("input[type='checkbox']").each { |ch| uncheck ch[:id] }
-      # x = find("ratings_#{rating}")
-    # x = find("ratings_#{rat}")
-  
-  
+
   # flunk "Unimplemented"
 end
 
