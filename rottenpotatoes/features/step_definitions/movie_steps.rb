@@ -46,12 +46,20 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
           end
         end
         
-        theR.each do |r|
-          if(theRatings.include?(r) == false)
-            uncheck "ratings[#{r}]"
-          end
-        end
-      
+        # if uncheck
+        #   theR.each do |r|
+        #     if(theRatings.include?(r) == false)
+        #       check "ratings[#{r}]"
+        #     end
+        #   end
+        # else
+        #   theR.each do |r|
+        #     if(theRatings.include?(r) == false)
+        #       uncheck "ratings[#{r}]"
+        #     end
+        #   end
+        # end
+        
   end
   # find(:css, "#cityID[]").set(true)
   # page.at_css("[class='Event_CategoryTree category']")
